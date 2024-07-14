@@ -21,6 +21,16 @@ import java.time.LocalDate;
 @Entity
 public class Booking extends BaseEntity {
 
+    public Booking() { }
+
+    public Booking(Long id, Long roomId, LocalDate bookDate, Integer startAt, Integer endAt) {
+        this.id = id;
+        this.roomId = roomId;
+        this.bookDate = bookDate;
+        this.startAt = startAt;
+        this.endAt = endAt;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -37,5 +47,6 @@ public class Booking extends BaseEntity {
 
     @NotNull
     private Integer endAt;
+
 
 }
