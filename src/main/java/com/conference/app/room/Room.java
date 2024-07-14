@@ -19,6 +19,14 @@ import lombok.EqualsAndHashCode;
 @Entity
 public class Room extends BaseEntity {
 
+    public Room() { }
+
+    public Room(Long id, String name, int capacity) {
+        this.id = id;
+        this.name = name;
+        this.capacity = capacity;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,5 +36,6 @@ public class Room extends BaseEntity {
 
     @NotNull
     private int capacity;
+
 
 }

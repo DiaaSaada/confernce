@@ -1,7 +1,7 @@
 package com.conference.app.booking;
 
 import com.conference.app.room.Room;
-import com.conference.app.room.RoomRepo;
+import com.conference.app.room.RoomService;
 import com.conference.app.util.AppException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,30 +16,24 @@ import java.util.Optional;
 public class BookingService {
 
 
-    private final RoomRepo roomRepo;
+    private final RoomService roomSrvc;
     BookingRepo bookingRepo;
 
     @Autowired
-    public BookingService(BookingRepo srvc, RoomRepo roomRepo) {
+    public BookingService(BookingRepo srvc, RoomService roomSrvc) {
 
         this.bookingRepo = srvc;
-        this.roomRepo = roomRepo;
+        this.roomSrvc = roomSrvc;
     }
 
-    public static ArrayList<int[]> getMaintenance() {
-        ArrayList<int[]> intervals = new ArrayList<>();
-        intervals.add(new int[]{900, 915});
-        intervals.add(new int[]{1300, 1315});
-        intervals.add(new int[]{1700, 1715});
-        return intervals;
-    }
+
 
     private static void assertNoMaintenance(BookDTO dto) {
-        for (var x : getMaintenance()) {
+        for (var x : RoomService.getMaintenance()) {
             if ((Integer.parseInt(dto.startAt) >= x[0] && Integer.parseInt(dto.startAt) <= x[1])
                     || (Integer.parseInt(dto.endAt) >= x[0] && Integer.parseInt(dto.endAt) <= x[1])
                     || (Integer.parseInt(dto.startAt) <= x[0] && Integer.parseInt(dto.endAt) >= x[1]))
-                throw new AppException("Rooms are not available due to scheduled Maintenance!");
+                throw new AppException(AppException.ERR_TYPE_MAINTENANCE);
         }
     }
 
@@ -59,15 +53,15 @@ public class BookingService {
         return endAtToRound;
     }
 
-    private static void assertBokingisToday(BookDTO dto) {
+    private static void assertBooking4Today(BookDTO dto) {
         if (!LocalDate.now().toString().equals(dto.bookingDate))
-            throw new AppException("INVALID DATE:" + dto.bookingDate);
+            throw new AppException(AppException.ERR_TYPE_INVALID_DATE);
     }
 
     public Optional<Booking> book(BookDTO dto) {
 
         // assertValidDate
-        assertBokingisToday(dto);
+        assertBooking4Today(dto);
 
         // assert no Maintenance within this time period
         assertNoMaintenance(dto);
@@ -75,13 +69,11 @@ public class BookingService {
         dto.endAt = round15Min(dto.endAt);
 
         // Get the Smallest Room
-
-        List<Room> rooms = roomRepo
+        List<Room> rooms = roomSrvc
                 .findByCapacityGreaterThanEqual(dto.attendees);
         if (rooms.isEmpty())
-            throw new AppException("NO ROOMS AVAILABLE");
+            throw new AppException(AppException.ERR_TYPE_EXCEED_CAPACITY);
 
-        System.out.println(rooms.getFirst().getName());
         for (Room room : rooms) {
             Optional<Booking> booking = bookingRepo.findBooking(room.getId(),
                     Integer.parseInt(dto.startAt),
@@ -95,6 +87,13 @@ public class BookingService {
                 return Optional.of(bookingRepo.save(newBooking));
             }
         }
-        throw new AppException("NO ROOMS AVAILABLE FOR THIS TIME SLOT");
+        throw new AppException(AppException.ERR_TYPE_NO_ROOMS_IN_TIME_SLOT);
+    }
+
+
+    public List<Booking> getBookings() {
+
+        return new ArrayList<>(this.bookingRepo.findAll());
+
     }
 }

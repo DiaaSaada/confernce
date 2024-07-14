@@ -18,12 +18,14 @@ public class BookingController {
 
     private final BookingService bookingSrvc;
     private final BookingRepo bookingRepo;
+    private final BookingService bookingService;
 
     @Autowired
-    public BookingController(BookingService bookingSrvc, BookingRepo bookingRepo
-    ) {
+    public BookingController(BookingService bookingSrvc, BookingRepo bookingRepo,
+                             BookingService bookingService) {
         this.bookingSrvc = bookingSrvc;
         this.bookingRepo = bookingRepo;
+        this.bookingService = bookingService;
     }
 
 
@@ -43,14 +45,7 @@ public class BookingController {
     @GetMapping
     public List<Booking> getBookings() {
 
-        var booking = new Booking();
-        booking.setId(123L);
-        booking.setEndAt(123);
-        booking.setStartAt(123);
-        booking.setRoomId(34535345L);
-        booking.setBookDate(LocalDate.now());
-        Optional.of(bookingRepo.save(booking));
-        return new ArrayList<>(this.bookingRepo.findAll());
+        return bookingService.getBookings();
 
     }
 
