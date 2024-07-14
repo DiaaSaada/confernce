@@ -1,5 +1,6 @@
 package com.conference.app.booking;
 
+import com.conference.app.booking.strategy.IBookingStrategy;
 import com.conference.app.room.Room;
 import com.conference.app.room.RoomService;
 import com.conference.app.util.AppException;
@@ -17,7 +18,11 @@ public class BookingService {
 
 
     private final RoomService roomSrvc;
-    BookingRepo bookingRepo;
+
+    private final BookingRepo bookingRepo;
+
+    @Autowired
+    private IBookingStrategy bookingStrategy;
 
     @Autowired
     public BookingService(BookingRepo srvc, RoomService roomSrvc) {
@@ -25,7 +30,6 @@ public class BookingService {
         this.bookingRepo = srvc;
         this.roomSrvc = roomSrvc;
     }
-
 
 
     private static void assertNoMaintenance(BookDTO dto) {
@@ -74,7 +78,8 @@ public class BookingService {
         if (rooms.isEmpty())
             throw new AppException(AppException.ERR_TYPE_EXCEED_CAPACITY);
 
-        for (Room room : rooms) {
+        return bookingStrategy.bookRoom(dto);
+        /*for (Room room : rooms) {
             Optional<Booking> booking = bookingRepo.findBooking(room.getId(),
                     Integer.parseInt(dto.startAt),
                     Integer.parseInt(dto.endAt)); // check if room is available
@@ -87,7 +92,7 @@ public class BookingService {
                 return Optional.of(bookingRepo.save(newBooking));
             }
         }
-        throw new AppException(AppException.ERR_TYPE_NO_ROOMS_IN_TIME_SLOT);
+        throw new AppException(AppException.ERR_TYPE_NO_ROOMS_IN_TIME_SLOT);*/
     }
 
 
