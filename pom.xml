@@ -8,11 +8,11 @@
         <version>3.2.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.todos.app</groupId>
-    <artifactId>demo</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>demo</name>
-    <description>Demo project for Spring Boot</description>
+    <groupId>com.conference.app</groupId>
+    <artifactId>conference-booking</artifactId>
+    <version>1.0.0</version>
+    <name>conference-booking</name>
+    <description>Conference Booking project with Spring Boot and Java22</description>
     <properties>
         <java.version>22</java.version>
     </properties>

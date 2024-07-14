@@ -25,3 +25,5 @@ replay_pid*
 /.idea
 /htmlReport
 target/classes/application-test.properties
+/target
+target/classes/application.properties
