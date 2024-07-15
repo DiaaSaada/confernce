@@ -50,6 +50,7 @@ public class FirstComeFirstServeStrategy implements IBookingStrategy {
                 newBooking.setStartAt(Integer.parseInt(dto.startAt));
                 newBooking.setRoomId(room.getId());
                 newBooking.setBookDate(LocalDate.now());
+                newBooking.setAttendees(dto.attendees);
                 return Optional.of(bookingRepo.save(newBooking));
             }
         }

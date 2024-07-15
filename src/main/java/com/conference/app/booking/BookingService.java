@@ -79,20 +79,6 @@ public class BookingService {
             throw new AppException(AppException.ERR_TYPE_EXCEED_CAPACITY);
 
         return bookingStrategy.bookRoom(dto);
-        /*for (Room room : rooms) {
-            Optional<Booking> booking = bookingRepo.findBooking(room.getId(),
-                    Integer.parseInt(dto.startAt),
-                    Integer.parseInt(dto.endAt)); // check if room is available
-            if (booking.isEmpty()) {
-                var newBooking = new Booking();
-                newBooking.setEndAt(Integer.parseInt(dto.endAt));
-                newBooking.setStartAt(Integer.parseInt(dto.startAt));
-                newBooking.setRoomId(room.getId());
-                newBooking.setBookDate(LocalDate.now());
-                return Optional.of(bookingRepo.save(newBooking));
-            }
-        }
-        throw new AppException(AppException.ERR_TYPE_NO_ROOMS_IN_TIME_SLOT);*/
     }
 
 

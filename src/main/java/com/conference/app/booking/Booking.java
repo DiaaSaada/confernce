@@ -21,32 +21,41 @@ import java.time.LocalDate;
 @Entity
 public class Booking extends BaseEntity {
 
-    public Booking() { }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @NotNull
+    private Long roomId;
+    @NotNull
+    private LocalDate bookDate;
+    @NotNull
+    private Integer startAt;
+    @NotNull
+    private Integer endAt;
+    @NotNull
+    private Integer attendees;
 
-    public Booking(Long id, Long roomId, LocalDate bookDate, Integer startAt, Integer endAt) {
+
+    public Booking() {
+    }
+
+    public Booking(Long id, Long roomId, LocalDate bookDate, Integer startAt, Integer endAt, Integer attendees) {
         this.id = id;
         this.roomId = roomId;
         this.bookDate = bookDate;
         this.startAt = startAt;
         this.endAt = endAt;
+        this.attendees = attendees;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @NotNull
-    private Long roomId;
-
-    @NotNull
-    private LocalDate bookDate;
-
-    @NotNull
-    private Integer startAt;
-
-
-    @NotNull
-    private Integer endAt;
-
+    public String toString() {
+        return "Booking: " +
+                ", roomId=" + roomId +
+                ", bookDate=" + bookDate +
+                ", startAt=" + String.format("%04d", this.getStartAt()) +
+                ", endAt=" + String.format("%04d", this.getEndAt()) +
+                ", attendees=" + attendees +
+                '}';
+    }
 
 }
