@@ -2,7 +2,7 @@ package com.conference.app.booking;
 
 import jakarta.validation.constraints.*;
 
-public class BookDTO {
+public class CreateBookingDTO {
 
 
     @NotNull(message = "startAt is required")
@@ -22,7 +22,7 @@ public class BookDTO {
     @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "Date must be in the format yyyy-MM-dd")
     public String bookingDate;
 
-    public BookDTO(String startAt, String endAt, int attendees, String bookingDate) {
+    public CreateBookingDTO(String startAt, String endAt, int attendees, String bookingDate) {
         this.startAt = startAt;
         this.endAt = endAt;
         this.attendees = attendees;

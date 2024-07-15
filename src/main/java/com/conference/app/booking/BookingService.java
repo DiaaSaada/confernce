@@ -32,7 +32,7 @@ public class BookingService {
     }
 
 
-    private static void assertNoMaintenance(BookDTO dto) {
+    private static void assertNoMaintenance(CreateBookingDTO dto) {
         for (var x : RoomService.getMaintenance()) {
             if ((Integer.parseInt(dto.startAt) >= x[0] && Integer.parseInt(dto.startAt) <= x[1])
                     || (Integer.parseInt(dto.endAt) >= x[0] && Integer.parseInt(dto.endAt) <= x[1])
@@ -57,12 +57,12 @@ public class BookingService {
         return endAtToRound;
     }
 
-    private static void assertBooking4Today(BookDTO dto) {
+    private static void assertBooking4Today(CreateBookingDTO dto) {
         if (!LocalDate.now().toString().equals(dto.bookingDate))
             throw new AppException(AppException.ERR_TYPE_INVALID_DATE);
     }
 
-    public Optional<Booking> book(BookDTO dto) {
+    public Optional<Booking> book(CreateBookingDTO dto) {
 
         // assertValidDate
         assertBooking4Today(dto);

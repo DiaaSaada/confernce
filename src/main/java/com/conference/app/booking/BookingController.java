@@ -6,10 +6,9 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "api/v1/booking")
@@ -17,20 +16,18 @@ public class BookingController {
 
 
     private final BookingService bookingSrvc;
-    private final BookingRepo bookingRepo;
     private final BookingService bookingService;
 
     @Autowired
-    public BookingController(BookingService bookingSrvc, BookingRepo bookingRepo,
+    public BookingController(BookingService bookingSrvc,
                              BookingService bookingService) {
         this.bookingSrvc = bookingSrvc;
-        this.bookingRepo = bookingRepo;
         this.bookingService = bookingService;
     }
 
 
     @PostMapping
-    public Optional<Booking> book(@Valid @RequestBody BookDTO dto) {
+    public Optional<BookingDTO> book(@Valid @RequestBody CreateBookingDTO dto) {
 
         if (!MilitaryTimeValidator.isValidMilitaryTime(dto.startAt)) {
             throw new AppException("Invalid startAt: " + dto.startAt);
@@ -38,14 +35,14 @@ public class BookingController {
         if (!MilitaryTimeValidator.isValidMilitaryTime(dto.endAt)) {
             throw new AppException("Invalid endAt: " + dto.endAt);
         }
-        return this.bookingSrvc.book(dto);
+        return this.bookingSrvc.book(dto).map(new BookingDTOMapper());
 
     }
 
     @GetMapping
-    public List<Booking> getBookings() {
+    public List<BookingDTO> getBookings() {
 
-        return bookingService.getBookings();
+        return bookingService.getBookings().stream().map(new BookingDTOMapper()).collect(Collectors.toList());
 
     }
 

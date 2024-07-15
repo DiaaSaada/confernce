@@ -1,8 +1,8 @@
 package com.conference.app.booking.strategy;
 
-import com.conference.app.booking.BookDTO;
 import com.conference.app.booking.Booking;
 import com.conference.app.booking.BookingRepo;
+import com.conference.app.booking.CreateBookingDTO;
 import com.conference.app.room.Room;
 import com.conference.app.room.RoomService;
 import com.conference.app.util.AppException;
@@ -36,7 +36,7 @@ public class FirstComeFirstServeStrategy implements IBookingStrategy {
      * @throws AppException
      */
     @Override
-    public Optional<Booking> bookRoom(BookDTO dto) {
+    public Optional<Booking> bookRoom(CreateBookingDTO dto) {
 
         List<Room> rooms = roomSrvc
                 .findByCapacityGreaterThanEqual(dto.attendees);

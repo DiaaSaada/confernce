@@ -53,7 +53,7 @@ class BookingServiceTest {
     @Test
     void book_duringMaintenance() {
         setup();
-        BookDTO dto = new BookDTO("0900", "0930", 1, LocalDate.now().toString()); // During maintenance
+        CreateBookingDTO dto = new CreateBookingDTO("0900", "0930", 1, LocalDate.now().toString()); // During maintenance
         var exception = assertThrows(AppException.class, () -> bookingService.book(dto));
         assertEquals(AppException.ERR_TYPE_MAINTENANCE, exception.getMessage());
     }
@@ -61,7 +61,7 @@ class BookingServiceTest {
     @Test
     void book_invalidDate() {
         setup();
-        BookDTO dto = new BookDTO("0800", "0900", 1, LocalDate.now().plusDays(1).toString());
+        CreateBookingDTO dto = new CreateBookingDTO("0800", "0900", 1, LocalDate.now().plusDays(1).toString());
         var exception = assertThrows(AppException.class, () -> bookingService.book(dto));
         assertEquals(AppException.ERR_TYPE_INVALID_DATE, exception.getMessage());
     }
@@ -69,7 +69,7 @@ class BookingServiceTest {
     @Test
     void book_exceedCapacity() {
         setup();
-        BookDTO dto = new BookDTO("0800", "0830", 100, LocalDate.now().toString());
+        CreateBookingDTO dto = new CreateBookingDTO("0800", "0830", 100, LocalDate.now().toString());
         var exception = assertThrows(AppException.class, () -> bookingService.book(dto));
         assertEquals(AppException.ERR_TYPE_EXCEED_CAPACITY, exception.getMessage());
     }
@@ -78,7 +78,7 @@ class BookingServiceTest {
     @Test
     void book_validBooking() {
         setup();
-        BookDTO dto = new BookDTO("0800", "0830", 5, LocalDate.now().toString());
+        CreateBookingDTO dto = new CreateBookingDTO("0800", "0830", 5, LocalDate.now().toString());
 
         when(roomService.findByCapacityGreaterThanEqual(5)).thenReturn(getRooms().stream().filter(r -> r.getCapacity() >= 5).toList());
 
@@ -99,7 +99,7 @@ class BookingServiceTest {
     @Test
     void book_validBooking2() {
         setup();
-        BookDTO dto = new BookDTO("0800", "0830", 5, LocalDate.now().toString());
+        CreateBookingDTO dto = new CreateBookingDTO("0800", "0830", 5, LocalDate.now().toString());
 
         when(roomService.findByCapacityGreaterThanEqual(5)).thenReturn(getRooms().stream().filter(r -> r.getCapacity() >= 5).toList());
 
