@@ -1,5 +1,7 @@
-package com.conference.app.room;
+package com.conference.app.room.seeder;
 
+import com.conference.app.room.entity.Room;
+import com.conference.app.room.entity.RoomRepo;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;

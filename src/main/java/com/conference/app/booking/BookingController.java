@@ -1,5 +1,8 @@
 package com.conference.app.booking;
 
+import com.conference.app.booking.entity.BookingDTO;
+import com.conference.app.booking.entity.BookingDTOMapper;
+import com.conference.app.booking.entity.CreateBookingDTO;
 import com.conference.app.util.AppException;
 import com.conference.app.validators.MilitaryTimeValidator;
 import jakarta.validation.Valid;

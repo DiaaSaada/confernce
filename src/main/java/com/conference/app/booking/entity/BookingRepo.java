@@ -1,4 +1,4 @@
-package com.conference.app.booking;
+package com.conference.app.booking.entity;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

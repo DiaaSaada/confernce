@@ -1,6 +1,9 @@
 package com.conference.app.booking;
 
-import com.conference.app.room.Room;
+import com.conference.app.booking.entity.Booking;
+import com.conference.app.booking.entity.BookingRepo;
+import com.conference.app.booking.entity.CreateBookingDTO;
+import com.conference.app.room.entity.Room;
 import com.conference.app.room.RoomService;
 import com.conference.app.util.AppException;
 import org.junit.jupiter.api.Test;

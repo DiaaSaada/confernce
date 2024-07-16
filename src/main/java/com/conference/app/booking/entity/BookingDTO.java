@@ -1,4 +1,4 @@
-package com.conference.app.booking;
+package com.conference.app.booking.entity;
 
 public record BookingDTO(Long roomId,
                          int attendees,

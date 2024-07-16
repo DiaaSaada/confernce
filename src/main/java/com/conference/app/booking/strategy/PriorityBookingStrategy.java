@@ -1,8 +1,8 @@
 package com.conference.app.booking.strategy;
 
-import com.conference.app.booking.Booking;
-import com.conference.app.booking.BookingRepo;
-import com.conference.app.booking.CreateBookingDTO;
+import com.conference.app.booking.entity.Booking;
+import com.conference.app.booking.entity.BookingRepo;
+import com.conference.app.booking.entity.CreateBookingDTO;
 import com.conference.app.room.RoomService;
 import com.conference.app.util.AppException;
 import org.springframework.beans.factory.annotation.Autowired;

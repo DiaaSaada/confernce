@@ -1,4 +1,4 @@
-package com.conference.app.room;
+package com.conference.app.room.entity;
 
 import com.conference.app.util.BaseEntity;
 import jakarta.persistence.Entity;

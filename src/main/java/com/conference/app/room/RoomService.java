@@ -1,5 +1,7 @@
 package com.conference.app.room;
 
+import com.conference.app.room.entity.Room;
+import com.conference.app.room.entity.RoomRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
