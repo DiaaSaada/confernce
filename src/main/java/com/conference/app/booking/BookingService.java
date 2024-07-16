@@ -3,6 +3,7 @@ package com.conference.app.booking;
 import com.conference.app.booking.entity.Booking;
 import com.conference.app.booking.entity.BookingRepo;
 import com.conference.app.booking.entity.CreateBookingDTO;
+import com.conference.app.booking.entity.GetAvailableRoomsDTO;
 import com.conference.app.booking.strategy.FirstComeFirstServeStrategy;
 import com.conference.app.booking.strategy.IBookingStrategy;
 import com.conference.app.room.entity.Room;
@@ -91,5 +92,10 @@ public class BookingService {
 
         return new ArrayList<>(this.bookingRepo.findAll());
 
+    }
+
+    public List<Room> getAvailableRooms(GetAvailableRoomsDTO dto) {
+
+        return new ArrayList<>(this.bookingRepo.getAvailableRooms(Integer.parseInt(dto.startAt), Integer.parseInt(dto.endAt), LocalDate.now()));
     }
 }
