@@ -27,7 +27,7 @@ class BookingControllerTest {
     private BookingService bookingService; // Example service, change based on your actual service
 
     @Test
-    public void getBookings() throws Exception {
+    public void                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           getBookings() throws Exception {
         // Mock the service response
         when(bookingService.getBookings()).thenReturn(List.of(
                 new Booking(1L, 1L, LocalDate.now(), 1100, 1200, 5),
@@ -39,9 +39,9 @@ class BookingControllerTest {
         // Perform the GET request and assert the response
         mockMvc.perform(get("/api/v1/booking"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].id").value(1L))
-                .andExpect(jsonPath("$[0].roomId").value(1L))
-                .andExpect(jsonPath("$[0].date").value(LocalDate.now().toString()))
+                .andExpect(jsonPath("$[0].id").doesNotExist())// id should be removed by the mapper
+                .andExpect(jsonPath("$[0].attendees").value(5))
+                .andExpect(jsonPath("$[0].bookingDate").value(LocalDate.now().toString()))
                 .andExpect(jsonPath("$[0].startAt").value(1100))
                 .andExpect(jsonPath("$[0].endAt").value(1200));
     }
