@@ -42,3 +42,5 @@ public class CustomExceptionHandler {
     }
 }
 
+record ApiErrorResponse (int code, String message) { }
+

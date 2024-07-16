@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface IBookingStrategy {
 
-    public Optional<Booking> bookRoom(CreateBookingDTO dto);
+    Optional<Booking> bookRoom(CreateBookingDTO dto);
 }

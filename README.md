@@ -17,24 +17,34 @@
 
 ```docker run -p 8080:8080 conference-booking```
 
+
+--- OR WITH MVN ---
+
+```mvn spring-boot:run```
+
 ## How to run tests
 
 ```mvn test```
 
 
 ## How to use
-Get all conferences
-```curl http://localhost:8080/api/v1/booking```
 
 Create new booking
-```curl --location 'http://localhost:8080/api/v1/booking' \
+```
+curl --location 'http://localhost:8080/api/v1/booking' \
 --header 'Content-Type: application/json' \
 --data '{
-  "attendees":  15,
-  "bookingDate": "2024-07-16",
-  "startAt": 1900,
-  "endAt": 1930
-}'```
+  "attendees":  7,
+  "bookingDate": "2024-07-18",
+  "startAt": "1900",
+  "endAt": "1930"
+}'
+```
+
+Get all conferences
+```
+curl --location 'http://localhost:8080/api/v1/booking'
+```
 
 ## Notes:
 * The project is using Lombok to reduce boilerplate code

@@ -28,7 +28,7 @@ public class PriorityBookingStrategy implements IBookingStrategy {
      * @throws AppException
      */
     @Override
-    public Optional<Booking> bookRoom(CreateBookingDTO dto) {
+    public Optional<Booking> bookRoom(CreateBookingDTO dto) throws AppException {
 
         throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED, "PriorityBooking feature is not yet implemented");
     }
