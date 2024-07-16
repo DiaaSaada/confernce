@@ -1,9 +1,8 @@
 package com.conference.app.booking;
 
+import com.conference.app.booking.entity.Booking;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -31,10 +30,10 @@ class BookingControllerTest {
     public void getBookings() throws Exception {
         // Mock the service response
         when(bookingService.getBookings()).thenReturn(List.of(
-                new Booking(1L, 1L, LocalDate.now(), 1100, 1200),
-                new Booking(2L, 2L, LocalDate.now(), 1100, 1200),
-                new Booking(3L, 2L, LocalDate.now(), 1100, 1200),
-                new Booking(4L, 3L, LocalDate.now(), 1100, 1200)
+                new Booking(1L, 1L, LocalDate.now(), 1100, 1200, 5),
+                new Booking(2L, 2L, LocalDate.now(), 1100, 1200, 5),
+                new Booking(3L, 2L, LocalDate.now(), 1100, 1200, 5),
+                new Booking(4L, 3L, LocalDate.now(), 1100, 1200, 5)
         ));
 
         // Perform the GET request and assert the response
