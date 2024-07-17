@@ -23,9 +23,9 @@ public interface BookingRepo extends JpaRepository<Booking, Long> {
 
 
     @Query("""
-            FROM Room r WHERE r.id NOT IN (SELECT b.roomId FROM Booking b WHERE b.roomId = r.id AND  b.bookDate = :bookDate AND ( (:startAt >= b.startAt AND :startAt <= b.endAt) OR  (:startAt <= b.startAt AND :endAt >= b.endAt) OR  (:endAt > b.startAt AND :endAt <= b.endAt)) \
+            FROM Room r WHERE r.capacity >= :attendees AND r.id NOT IN (SELECT b.roomId FROM Booking b WHERE b.roomId = r.id AND  b.bookDate = :bookDate AND ( (:startAt >= b.startAt AND :startAt <= b.endAt) OR  (:startAt <= b.startAt AND :endAt >= b.endAt) OR  (:endAt > b.startAt AND :endAt <= b.endAt)) \
             )""")
-    List<Room> getAvailableRooms( @Param("startAt") int startAt
-            , @Param("endAt") int endAt   , @Param("bookDate") LocalDate bookDate);
+    List<Room> getAvailableRooms(@Param("startAt") int startAt
+            , @Param("endAt") int endAt, @Param("bookDate") LocalDate bookDate, @Param("attendees") int attendees);
 
 }

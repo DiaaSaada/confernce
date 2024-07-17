@@ -2,7 +2,7 @@ package com.conference.app.booking.entity;
 
 import jakarta.validation.constraints.*;
 
-public class CreateBookingDTO {
+public class CreateBookingDTO extends GetAvailableRoomsDTO {
 
 
     @NotNull(message = "startAt is required")
@@ -23,6 +23,7 @@ public class CreateBookingDTO {
     public String bookingDate;
 
     public CreateBookingDTO(String startAt, String endAt, int attendees, String bookingDate) {
+        super(startAt, endAt, attendees);
         this.startAt = startAt;
         this.endAt = endAt;
         this.attendees = attendees;

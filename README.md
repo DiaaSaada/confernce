@@ -1,12 +1,12 @@
 # Conference Booking
 
 ## Setup
+
 * The project is using port 8080
 * The project is using H2 database( in memory database)
 * The project is using JPA provider Hibernate
 * The project is using Spring Boot version 3.2.4
 * The project is using Java version 22
-
 
 ## How to run
 
@@ -17,7 +17,6 @@
 
 ```docker run -p 8080:8080 conference-booking```
 
-
 --- OR WITH MVN ---
 
 ```mvn spring-boot:run```
@@ -26,10 +25,10 @@
 
 ```mvn test```
 
-
 ## How to use
 
 Create new booking
+
 ```
 curl --location 'http://localhost:8080/api/v1/booking' \
 --header 'Content-Type: application/json' \
@@ -41,16 +40,26 @@ curl --location 'http://localhost:8080/api/v1/booking' \
 }'
 ```
 
-Get all conferences
+Get all available conference-rooms between to times
+
+```
+curl --location 'http://127.0.0.1:8080/api/v1/booking/available?startAt=1800&endAt=1900&attendees=1'
+```
+
+Get all conference-rooms
+
 ```
 curl --location 'http://localhost:8080/api/v1/booking'
 ```
 
 ## Notes:
+
 * The project is using Lombok to reduce boilerplate code
 * The project is using Spring Data JPA to interact with the database
 * JUnit is used for testing
 * Inner service will throw AppException which will be caught by the CustomExceptionHandler return 400 HTTP response
-* Jakarta will throw MethodArgumentNotValidException which will be caught by the CustomExceptionHandler return 400 HTTP response
-* The project is expecting & saving Military time, which is 24 hours format e.g. 1515 for 3:15 PM which is easier to validate and manipulate
+* Jakarta will throw MethodArgumentNotValidException which will be caught by the CustomExceptionHandler return 400 HTTP
+  response
+* The project is expecting & saving Military time, which is 24 hours format e.g. 1515 for 3:15 PM which is easier to
+  validate and manipulate
 * Data seeding of the rooms are seeded via CommandLineRunner by com.conference.app.room.seeder.DataSeeder class 
